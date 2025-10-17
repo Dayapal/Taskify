@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 
-const Login = () => {
+const Login = ({setToken}) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,9 +23,10 @@ const Login = () => {
           "Content-Type": "application/json"
         }
       })
-      console.log(data)
       toast.success(data.message || "Login successfully")
-      localStorage.setItem("jwt",data.user.token)
+        localStorage.setItem('jwt', data.user.token)
+      setToken(data.user.token) // <-- update state so App re-renders
+      console.log(data)
     
       console.log(data)
       setEmail("");
